@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="full-screen" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="format-detection" content="address=no">
+    <title>房源</title>
+    <script>
+        document.documentElement.style.height = window.innerHeight + 'px';
+    </script>
+</head>
+<body>
+<section>
+    <header>
+        <p>
+            <a href="javascript:;" class="cancel">取消</a>
+            房源
+            <a href="javascript:;" class="confirm">确定</a>
+        </p>
+    </header>
+    <div class="compile">
+      <img />
+    </div>
+</section>
+
+<script src="../../../Web/public/Mwap/com/systoon/Mwap.js"></script>
+<script src="../../../Web/public/Mwap/jquery/jquery-1.11.1.min.js"></script>
+
+<script>
+    Mwap.init();
+    Mwap.events.on(Mwap.nativeTypes.loadParams, function(e){
+        alert("load params : " + JSON.stringify(e));
+    });
+    $('.confirm').on('click', function() {
+        Mwap.events.trigger(Mwap.eventTypes.camera,{size:"60x60",device:"iPhone6"});
+    });
+    Mwap.events.on(Mwap.eventTypes.camera,function(e){
+        alert("camera : " + JSON.stringify(e));
+        $('.compile img').prop("src", e.value.data.url);
+    });
+    Mwap.events.trigger(Mwap.eventTypes.camera, {size:"60x60",device:"iPhone6"});
+
+</script>
+</body>
+</html>
