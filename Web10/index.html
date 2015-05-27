@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="full-screen" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="format-detection" content="address=no">
+    <title>房源插件</title>
+    <script>
+        document.documentElement.style.height = window.innerHeight + 'px';
+    </script>
+</head>
+<body>
+<section>
+
+    <a id="redirect" href="#" data-role="button">syswin.com</a>
+
+    <div class="compile">
+      <img />
+    </div>
+</section>
+
+<script src="./MWap/com/systoon/Mwap.js"></script>
+<script src="./MWap/jquery/jquery.js"></script>
+
+<script>
+    Mwap.init();
+    Mwap.events.on(Mwap.nativeTypes.loadParams, function(e){
+        alert("parameters from mwap : " + JSON.stringify(e));
+    });
+
+    alert("plugin starts loading...");
+
+    $('#redirect').on('click', function() {
+        alert("before triggering redirect");
+        Mwap.events.trigger(
+            Mwap.eventTypes.redirect,
+            {
+                type: "Plugin",
+                id: "1",
+                device: "iphone6",
+                url: "http://www.syswin.com"
+            }
+        );
+        alert("after triggering redirect");
+    });
+
+    Mwap.events.on(Mwap.eventTypes.redirect,function(e){
+        alert("redirect event handled : " + JSON.stringify(e));
+    });
+
+</script>
+</body>
+</html>
